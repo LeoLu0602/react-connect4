@@ -4,30 +4,45 @@ import './index.css'
 
 function Column(props) {
     return (
-        <button className="column">
-            {props.value}
-        </button>
+        <div className="column">
+            <button className="column-btn" />
+            <div className="block">{props.arr[0]}</div>
+            <div className="block">{props.arr[1]}</div>
+            <div className="block">{props.arr[2]}</div>
+            <div className="block">{props.arr[3]}</div>
+            <div className="block">{props.arr[4]}</div>
+            <div className="block">{props.arr[5]}</div>
+        </div>
     );
 }
 class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            columns: [
+                Array(7).fill(null),
+                Array(7).fill(null),
+                Array(7).fill(null),
+                Array(7).fill(null),
+                Array(7).fill(null),
+                Array(7).fill(null),
+                Array(7).fill(null),
+            ],
         };
     }
 
     renderColumn(i) {
         return (
             <Column 
-                value={i}
+                number={i}
+                arr={this.state.columns[i]}
             />
         );
     }
 
     render() {
         return (
-            <div>
+            <div className="board">
                 {this.renderColumn(0)}
                 {this.renderColumn(1)}
                 {this.renderColumn(2)}
@@ -44,9 +59,7 @@ class Game extends React.Component {
     render () {
         return (
             <div className="game">
-                <div className="game-board">
-                    <Board />
-                </div>
+                <Board />
             </div>
         );
     }

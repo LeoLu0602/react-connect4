@@ -1,0 +1,28 @@
+.game {
+    text-align: center;
+}
+
+.board {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.column {
+    background-color: blue;
+}
+
+.column-btn {
+    width: 6vw;
+    height: 4vw;
+    margin-bottom: 1vh;
+}
+
+.block {
+    height: 4vw;
+    background-color: white;
+    border-radius: 50%;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
