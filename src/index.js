@@ -34,6 +34,9 @@ class Board extends React.Component {
 
     handleClick(i) {
         const columns = this.state.columns.slice();
+        if (calculateWinner(columns)) {
+            return;
+        }
         let available = false;
         for (let j = 0; j < 6; j++) {
             if (!columns[i][j]) { // find an empty block
@@ -42,7 +45,6 @@ class Board extends React.Component {
                 break;
             }
         }
-        console.log(available);
         if (available) { // if column i is not full
             this.setState({
                 columns: columns,
@@ -73,7 +75,8 @@ class Board extends React.Component {
 
         return (
             <div className="game">
-                <div className="status" style={{color: this.state.isPlayer1Next ? "red" : "yellow"}}>{status}</div>
+                <div className="title">React Connet 4</div>
+                <div className="status" style={{color: winner == "Player 1" ? "red" : winner == "Player 2" ? "yellow" : this.state.isPlayer1Next ? "red" : "yellow"}}>{status}</div>
                 <div className="board">
                     {this.renderColumn(0)}
                     {this.renderColumn(1)}
@@ -98,7 +101,45 @@ class Game extends React.Component {
 }
 
 function calculateWinner(columns) {
-
+    const lines = [];
+    // horizontal
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 4; j++) {
+            lines.push([[i, j], [i, j + 1], [i, j + 2], [i, j + 3]]);
+        }
+    }
+    // vertical
+    for (let j = 0; j < 7; j++) {
+        for (let i = 0; i < 3; i++) {
+            lines.push([[i, j], [i + 1, j], [i + 2, j], [i + 3, j]]);
+        }
+    }
+    // not horizontal not vertical
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 7; j++) {
+            if (i - 3 >= 0 && j + 3 < 7) { 
+                lines.push([[i, j], [i - 1, j + 1], [i - 2, j + 2], [i - 3, j + 3]]);
+            }
+            if (i - 3 >= 0 && j - 3 >= 0) {
+                lines.push([[i, j], [i - 1, j - 1], [i - 2, j - 2], [i - 3, j - 3]]);
+            }
+        }
+    }
+    // check
+    for (let i = 0; i < lines.length; i++) {
+        const p1 = lines[i][0];
+        const p2 = lines[i][1];
+        const p3 = lines[i][2];
+        const p4 = lines[i][3];
+        if (columns[p1[0]][p1[1]] && columns[p1[0]][p1[1]] === columns[p2[0]][p2[1]] && columns[p1[0]][p1[1]] === columns[p3[0]][p3[1]] && columns[p1[0]][p1[1]] === columns[p4[0]][p4[1]]) {
+            if (columns[p1[0]][p1[1]] == 1) {
+                return "Player 1";
+            }
+            else if (columns[p1[0]][p1[1]] == 2) {
+                return "Player 2";
+            }
+        }
+    }
     return null;
 }
 
