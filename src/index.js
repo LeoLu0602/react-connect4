@@ -73,7 +73,7 @@ class Board extends React.Component {
 
         return (
             <div className="game">
-                <div className="status">{status}</div>
+                <div className="status" style={{color: this.state.isPlayer1Next ? "red" : "rgb(230, 218, 0)"}}>{status}</div>
                 <div className="board">
                     {this.renderColumn(0)}
                     {this.renderColumn(1)}
