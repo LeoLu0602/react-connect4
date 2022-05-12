@@ -6,12 +6,12 @@ function Column(props) {
     return (
         <div className="column">
             <button className="column-btn" onClick={props.onClick}/>
-            <div className="block" id="5"></div>
-            <div className="block" id="4"></div>
-            <div className="block" id="3"></div>
-            <div className="block" id="2"></div>
-            <div className="block" id="1"></div>
-            <div className="block" id="0"></div>
+            <div className="block" style={{backgroundColor: props.arr[5] == 1 ? "red" : props.arr[5] == 2 ? "yellow" : "white"}}></div>
+            <div className="block" style={{backgroundColor: props.arr[4] == 1 ? "red" : props.arr[4] == 2 ? "yellow" : "white"}}></div>
+            <div className="block" style={{backgroundColor: props.arr[3] == 1 ? "red" : props.arr[3] == 2 ? "yellow" : "white"}}></div>
+            <div className="block" style={{backgroundColor: props.arr[2] == 1 ? "red" : props.arr[2] == 2 ? "yellow" : "white"}}></div>
+            <div className="block" style={{backgroundColor: props.arr[1] == 1 ? "red" : props.arr[1] == 2 ? "yellow" : "white"}}></div>
+            <div className="block" style={{backgroundColor: props.arr[0] == 1 ? "red" : props.arr[0] == 2 ? "yellow" : "white"}}></div>
         </div>
     );
 }
@@ -73,7 +73,7 @@ class Board extends React.Component {
 
         return (
             <div className="game">
-                <div className="status" style={{color: this.state.isPlayer1Next ? "red" : "rgb(230, 218, 0)"}}>{status}</div>
+                <div className="status" style={{color: this.state.isPlayer1Next ? "red" : "yellow"}}>{status}</div>
                 <div className="board">
                     {this.renderColumn(0)}
                     {this.renderColumn(1)}
